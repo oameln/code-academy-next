@@ -1,14 +1,28 @@
-// src/app/about/[name]/page.tsx
-import { FC } from "react";
+import type { Metadata } from 'next'
 
-interface ownProps { params: { name: string } };
+interface PageProps {
+  params: Promise<{ name: string }>
+}
 
-const AboutName: FC<ownProps> = async ({ params }) => {
-  const { name } = await params;
-  return <div>
-    <h1>Om {name}</h1>
-    <p>Dette er en side med masse info om {name}</p>
-  </div >;
-};
+// Generate metadata (also needs to be async now)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { name } = await params
+  
+  return {
+    title: `About ${name}`,
+    description: `Learn more about ${name}`,
+  }
+}
 
-export default AboutName;
+// Main page component
+export default async function AboutPage({ params }: PageProps) {
+  const { name } = await params
+  
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>About {name}</h1>
+      <p>Welcome to {name}'s page!</p>
+      <p>This is a dynamic route in Next.js 15.</p>
+    </div>
+  )
+}
