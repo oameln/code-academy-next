@@ -21,7 +21,7 @@ export default async function AboutPage({ params }: PageProps) {
   return (
     <div style={{ padding: '2rem' }}>
       <h1>About {name}</h1>
-      <p>Welcome to {name}'s page!</p>
+      <p>Welcome to {name}&apos;s page!</p>
       <p>This is a dynamic route in Next.js 15.</p>
     </div>
   )
